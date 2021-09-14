@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="app-title">Angular 11 - CRUD with Reactive Forms</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-1 col-md-5">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">Form</div>
+      <div class="panel-body">
+        
+        <form autocomplete="off" [formGroup]="brandForm">
+          <div class="form-group" [ngClass]="{ 'has-error': isSubmitted && _fc.name.errors }">
+            <label for="name">Brand Name:</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            <span *ngIf="isSubmitted && _fc.name.errors" class="help-block">Name is required!</span>
+          </div>
+          
+          <button type="button" class="btn btn-success" (click)="save()"> {{ !brandForm.get('id').value ? 'Create' : 'Update' }}</button>
+          <button type="button" class="btn btn-danger" (click)="reset()">Reset</button>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-5">
+    
+    <div class="panel panel-primary">
+      <div class="panel-heading">List</div>
+      <div class="panel-body">
+
+        <table style="width:100%">
+          <tr>
+            <th>Name</th>
+            <th>Action</th>
+          </tr>
+          <tr *ngFor="let brand of brandList">
+            <td>{{ brand.name }}</td>
+            <td>
+              <button (click)="edit(brand.id)" class="btn btn-sm btn-warning" [disabled]="brand.isReading">
+                <span>Edit</span>
+              </button>
+              <button (click)="delete(brand.id)" class="btn btn-sm btn-danger" [disabled]="brand.isDeleting">
+                <span>Delete</span>
+              </button>
+            </td>
+          </tr>
+        </table>
+
+        </div>
+      </div>
+  </div>
+
+</div>
